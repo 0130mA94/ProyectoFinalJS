@@ -19,13 +19,13 @@ function mostrarComics(data){
         cardComic.setAttribute('id', 'comic-card');
         cardComic.innerHTML =
             `<img class = 'Comics-img' src= "${Comics?.img}" alt ="${Comics?.nombre}"></img>
- <div class="comic-desc">
-     <h5 class="comic-nombre">${Comics?.nombre}</h5>
-     <h5 class="comic-Editorial">${Comics?.editorial}</h5>
+<div class="comic-desc">
+    <h5 class="comic-nombre">${Comics?.nombre}</h5>
+    <h5 class="comic-Editorial">${Comics?.editorial}</h5>
 
-     <button id = "${Comics.id}" class="btn-compra">Agregar al carrito</button>
- </div>`;
- ComicsCont.appendChild(cardComic);
+    <button id = "${Comics.id}" class="btn-compra">Agregar al carrito</button>
+</div>`;
+ComicsCont.appendChild(cardComic);
 
     });
     const btnComprar = document.querySelectorAll(".btn-compra");
@@ -54,7 +54,7 @@ const agregarAlCarrito = (id) => {
 }
 
 
- console.log(carrito);
+console.log(carrito);
 
 function Comic(editorial, nombre,edición,precio,cantidad,disponibilidad){
     this.editorial = editorial;
