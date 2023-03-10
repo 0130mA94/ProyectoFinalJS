@@ -1,0 +1,37 @@
+#ComicsCont{
+    display: flex;
+    flex-direction:row;
+    flex-wrap: wrap;
+    text-align: center;
+    font-size: 2em;
+    justify-content: space-between;
+    margin-top: 3em;
+    row-gap: 30 px;
+
+}
+.Comics-img{
+
+    flex-direction: row;
+    margin-top: 2em;
+    width: 170px;
+    height: 200px;
+    border-color: black solid;
+    border-radius: 15px;
+
+}
+#navHeader{
+    text-align: center;
+    font-size: 2em;
+
+}
+.btn-compra{
+    color: rgb(206, 10, 10);
+    border-radius: 5px;
+    border-color: black;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.btn-compra:hover{
+    background-color: rgb(34, 34, 150);
+    color: white;
+
+}
