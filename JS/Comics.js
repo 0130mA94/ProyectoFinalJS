@@ -8,14 +8,14 @@ const Comics = [
 },
 {
     id:2,
-    img: "https://cdn.normacomics.com/media/catalog/product/cache/1/image/588x473/9df78eab33525d08d6e5fb8d27136e95/m/u/muerte_cap_america_integral.jpg",
+    img: "./Imag-Comics/La muerte del Capitan America.jpg",
     nombre: "La muerte del Capitán América",
     editorial: "Marvel Comics",
     precio: 45
 },
 {
     id:3,
-    img:"https://static.fnac-static.com/multimedia/Images/ES/NR/ca/ba/69/6929098/1540-1.jpg",
+    img:"./Imag-Comics/La Ultima caceria de Kraven.jpg",
     nombre: " Spiderman: La última cacería de Kraven",
     editorial: "Marvel Comics",
     precio: 9.99
@@ -47,5 +47,12 @@ const Comics = [
     nombre: "Batman: Saga La corte de los búhos",
     editorial:"DC",
     precio: 20,
+},
+{
+    id:7,
+    img: "./Imag-Comics/HouseofM.jpeg",
+    nombre: "Avengers: House of M",
+    editorial:"Marvel Comics",
+    precio: 45,
 }
 ]
