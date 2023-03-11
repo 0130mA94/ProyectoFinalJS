@@ -97,6 +97,10 @@ const Compra = {
     cantidad: 40,
     precioMinorista: 9.99, 
 }
+const ComicsEnCarrito = JSON.parse(localStorage.getItem('Compra')) ?? [];
+console.log(ComicsEnCarrito);
+console.log("carro vacío");
+console.log(ComicsEnCarrito);
 const CompraJSON = JSON.stringify(Compra);
 localStorage.setItem("Compra",CompraJSON);
 
