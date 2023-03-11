@@ -1,3 +1,11 @@
+body{
+    background-color: skyblue;
+}
+
+
+
+
+
 #ComicsCont{
     display: flex;
     flex-direction:row;
@@ -14,14 +22,18 @@
 
     flex-direction: row;
     margin-top: 2em;
-    width: 170px;
+    max-width: 170px;
     height: 200px;
     border-radius: 15px;
-
+    border-color: brown solid;
+    border: solid 3px;
 }
+
+
 #navHeader{
     text-align: center;
     font-size: 2em;
+    border: black solid;
 
 }
 .btn-compra{

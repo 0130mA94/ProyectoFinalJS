@@ -18,7 +18,7 @@ function mostrarComics(data){
         const cardComic = document.createElement('article');
         cardComic.setAttribute('id', 'comic-card');
         cardComic.innerHTML =
-            `<img class = 'Comics-img' src= "${Comics?.img}" alt ="${Comics?.nombre}"></img>
+            `<img class = 'Comics-img' src= "${Comics?.img}" class ="img-fluid" alt ="${Comics?.nombre}"></img>
 <div class="comic-desc">
     <h5 class="comic-nombre">${Comics?.nombre}</h5>
     <h5 class="comic-Editorial">${Comics?.editorial}</h5>
