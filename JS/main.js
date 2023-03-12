@@ -2,13 +2,14 @@ localStorage.setItem("saludo","Bienvenido a la cueva del comic!");
 let saludo = localStorage.getItem("saludo");
 console.log(saludo);
 
-const ComicsCont = document.querySelector('#ComicsCont');
-
-console.log(ComicsCont);
+/*const ComicsCont = document.querySelector('#ComicsCont');*/
+let comics = [];
+let carrito = [];
+carrito = JSON.parse (localStorage.getItem("carrito")) || [];
 
 const Comics = "JSON/Comics.json";
 
-const carrito = [];
+
 
 
 fetch(Comics)
@@ -37,17 +38,78 @@ fetch(Comics)
         console.log("agregado al carrito!");
         }); 
     });
-const agregarAlCarrito = (id) => {
-    const ComicsEnCarrito = carrito.find(Com => Com.id === id);
-        if(ComicsEnCarrito){
-            ComicsEnCarrito.cantidad++;
-        } else{
-            const Com = Comics.find(Com => Com.id == id);
-            carrito.push(Comics);
-        }
+
+const contenedorCarrito = document.getElementById("ContenedorCarrito");
+const verCarrito = document.getElementById("VerCarrito");
+
+verCarrito.addEventListener("click", () => {
+    mostrarCarrito();
+});
+
+const mostrarCarrito = () => {
+    contenedorCarrito.innerHTML = "";
+    carrito.forEach((producto) => {
+        const card = document.createElement("div");
+        card.classList.add("col-xl-3", "col-md-6","col-xs-12");
+
+        ComicsCont.innerHTML =` 
+    <div class = "card">
+        <img src="${producto.img}" class ="card-img-top imgProductos">
+        <div class="card-body">
+        <h5 class= "card-title"> ${producto.nombre} </h5>
+        <p class class="card-text"> ${producto.precio}</p>
+        <p class = "card-text> ${producto.cantidad}</p>
+        <button class ="btn colorbtn" id= "eliminar${producto.id}"</button>
+        <button class = "btn colorbtn" id= "aumentar${producto.id}"</button>
+        <button class = "btn colorbtn" id = "disminuir${producto.id}"</button>
+        </div>
+    </div>
+    `
+    contenedorCarrito.appendChild(card);
+    const boton = document.getElementById()
+
+    const eliminar = document.getElementById(`disminuir${producto.id}`);
+    eliminar.addEventListener("click", () => {
+        disminuirCantidad(producto.id);
+
+    })
+    const aumentar = document.getElementById(`aumentar${producto.id}`);
+    aumentar.addEventListener("click", () => {
+        agregarAlCarrito(producto.id);
+    })
+    const btn = document.getElementById(`eliminar${producto.id}`);
+    btn.addEventListener("click", () => {
+        eliminarDelCarrito(producto.id);
+    })
+    caluclarTotal();
+    });
 }
 
+const agregarAlCarrito = (id) => {
+    const producto = carrito.find((producto) => producto.id === id);
+    producto.cantidad++;
+    localStorage.setItem("carrito",JSON.stringify(carrito));
+    mostrarCarrito();
+}
+const disminuirCantidad = (id) => {
+    const producto = carrito.find((producto) => producto.id === id);
+    producto.cantidad --;
+    if(producto.cantidad === 0){
+        eliminarDelCarrito(id);
+    }
+    else{
+        localStorage.setItem("carrito",JSON.stringify(carrito));
+    }
+    mostrarCarrito();
+}
 
+const eliminarDelCarrito = (id) => {
+    const producto = carrito.find ((producto) => producto.id === id);
+    const indice = carrito.indexOf(producto);
+    carrito.splice(indice, 1);
+    mostrarCarrito();
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
 console.log(carrito);
 
 
