@@ -2,47 +2,41 @@ localStorage.setItem("saludo","Bienvenido a la cueva del comic!");
 let saludo = localStorage.getItem("saludo");
 console.log(saludo);
 
-
-
-
-
-
-
 const ComicsCont = document.querySelector('#ComicsCont');
+
 console.log(ComicsCont);
+
+const Comics = "JSON/Comics.json";
 
 const carrito = [];
 
-function mostrarComics(data){
-    data.forEach(Comics => {
-        const cardComic = document.createElement('article');
-        cardComic.setAttribute('id', 'comic-card');
-        cardComic.innerHTML =
-            `<img class = 'Comics-img' src= "${Comics?.img}" class ="img-fluid" alt ="${Comics?.nombre}"></img>
-<div class="comic-desc">
-    <h5 class="comic-nombre">${Comics?.nombre}</h5>
-    <h5 class="comic-Editorial">${Comics?.editorial}</h5>
 
-    <button id = "${Comics.id}" class="btn-compra">Agregar al carrito</button>
-</div>`;
-ComicsCont.appendChild(cardComic);
+fetch(Comics)
+    .then(respuesta => respuesta.json())
+    .then(datos =>{
+        datos.forEach( producto => {
+            ComicsCont.innerHTML += `
+            <div class="comic-desc">
+            <img class = 'Comics-img' src="${producto.img} " alt="${producto.nombre}"> 
+            
+            <h5 class="comic-nombre">Nombre: ${producto.nombre} </h5>
+            <p> Precio: ${producto.precio} </p> 
+            <h5 class="comic-Editorial">${producto.editorial}</h5>
+            <button class="btn-compra">Agregar al carrito</button>
+            </div>`;
+        })
+    
+    })
+    .catch(error => console.log(error))
+    .finally( () => console.log("Proceso finalizado"));
 
-    });
     const btnComprar = document.querySelectorAll(".btn-compra");
     btnComprar.forEach(el => {
         el.addEventListener("click",(e) => {
-            agregarAlCarrito(e.target.id);
-            console.log("agregado al carrito!");
-        });
-
-
-        
-
+        agregarAlCarrito(e.target.id);
+        console.log("agregado al carrito!");
+        }); 
     });
-}
-
-mostrarComics(Comics);
-
 const agregarAlCarrito = (id) => {
     const ComicsEnCarrito = carrito.find(Com => Com.id === id);
         if(ComicsEnCarrito){
@@ -55,6 +49,7 @@ const agregarAlCarrito = (id) => {
 
 
 console.log(carrito);
+
 
 function Comic(editorial, nombre,edición,precio,cantidad,disponibilidad){
     this.editorial = editorial;
@@ -86,7 +81,7 @@ const Comic1 = {
     nombre: "Crisis en tierras inifitas",
     Editorial: "DC",
     Precio: 45,
-    canitdad: 30,
+    cantidad: 30,
     disponibilidad: "si"
 };
 const Compra = {
@@ -108,3 +103,31 @@ const Comic1JSON = JSON.stringify(Comic1);
 console.log(Comic1);
 
 localStorage.setItem("Comic1",Comic1JSON);
+
+
+
+
+
+
+/*
+
+
+const eliminar = document.getElementById(`disminuir${Comics.id}`);
+
+
+
+    });
+    
+
+
+        
+
+    });
+}
+
+mostrarComics(Comics);
+
+
+
+*/
+

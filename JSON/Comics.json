@@ -1,0 +1,59 @@
+[ 
+    {
+    "id": 1,
+    "img": "./Imag-Comics/05.jpg",
+    "nombre": "Avengers: Civil War",
+    "editorial": "Marvel Comics",
+    "precio": 34.5
+},
+{
+    "id":2,
+    
+    "img": "./Imag-Comics/La muerte del Capitan America.jpg",
+    "nombre": "La muerte del Capitán América",
+    "editorial": "Marvel Comics",
+    "precio": 45
+},
+{
+    "id":3,
+    "img":"./Imag-Comics/La Ultima caceria de Kraven.jpg",
+    "nombre": " Spiderman: La última cacería de Kraven",
+    "editorial": "Marvel Comics",
+    "precio": 9.99
+},
+{
+    "id":4,
+    "img": "https://m.media-amazon.com/images/I/81owJzlRdQL.jpg",
+    "nombre": "Batman: Una muerte en la familia",
+    "editorial": "DC",
+    "precio": 25.5
+},
+{
+    "id":5,
+    "img": "https://www.ecccomics.com/content/productos/9712/cubierta_DCBlackLabel_BM_Ano_Uno_3ED.jpg",
+    "nombre": "Batman: Año uno",
+    "editorial": "DC",
+    "precio": 9.99
+},
+{
+    "id":6,
+    "img": "https://www.ecccomics.com/content/productos/9003/cubierta_DCBLackLabel_BM_ElRegresoDelCaballeroOscuro.jpg",
+    "nombre":"Batman: El regreso del caballero oscuro",
+    "editorial": "DC",
+    "precio": 12.9
+},
+{
+    "id":7,
+    "img": "./Imag-Comics/LaCorteDeLosBuhos.webp",
+    "nombre": "Batman: Saga La corte de los búhos",
+    "editorial":"DC",
+    "precio": 20
+},
+{
+    "id":7,
+    "img": "./Imag-Comics/HouseofM.jpeg",
+    "nombre": "Avengers: House of M",
+    "editorial":"Marvel Comics",
+    "precio": 45
+}
+]
