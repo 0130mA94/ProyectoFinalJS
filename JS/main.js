@@ -39,7 +39,7 @@ fetch(Comics)
         }); 
     });
 
-const contenedorCarrito = document.getElementById("ContenedorCarrito");
+
 const verCarrito = document.getElementById("VerCarrito");
 
 verCarrito.addEventListener("click", () => {
@@ -166,7 +166,7 @@ console.log(Comic1);
 
 localStorage.setItem("Comic1",Comic1JSON);
 
-
+const contenedorCarrito = document.getElementById("contenedorCarrito");
 
 
 
