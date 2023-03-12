@@ -23,22 +23,22 @@ fetch(Comics)
             <h5 class="comic-nombre">Nombre: ${producto.nombre} </h5>
             <p> Precio: ${producto.precio} </p> 
             <h5 class="comic-Editorial">${producto.editorial}</h5>
-            <button class="btn-compra">Agregar al carrito</button>
+            <button id="${producto.id} class="btn-compra">Agregar al carrito</button>
             </div>`;
         })
+        const btnComprar = document.querySelectorAll(".btn-compra");
+        btnComprar.forEach(el => {
+            el.addEventListener("click",(e) => {
+            agregarAlCarrito(e.target.id);
+            console.log("agregado al carrito!");
+            }); 
+        });
     
     })
     .catch(error => console.log(error))
     .finally( () => console.log("Proceso finalizado"));
 
-    const btnComprar = document.querySelectorAll(".btn-compra");
-    btnComprar.forEach(el => {
-        el.addEventListener("click",(e) => {
-        agregarAlCarrito(e.target.id);
-        console.log("agregado al carrito!");
-        }); 
-    });
-
+   
 
 const verCarrito = document.getElementById("VerCarrito");
 
@@ -86,15 +86,15 @@ const mostrarCarrito = () => {
 }
 
 const agregarAlCarrito = (id) => {
-    const producto = carrito.find((producto) => producto.id === id);
+    const producto = carrito.find((producto) => producto.id == id);
     producto.cantidad++;
     localStorage.setItem("carrito",JSON.stringify(carrito));
     mostrarCarrito();
 }
 const disminuirCantidad = (id) => {
-    const producto = carrito.find((producto) => producto.id === id);
+    const producto = carrito.find((producto) => producto.id == id);
     producto.cantidad --;
-    if(producto.cantidad === 0){
+    if(producto.cantidad == 0){
         eliminarDelCarrito(id);
     }
     else{
@@ -104,7 +104,7 @@ const disminuirCantidad = (id) => {
 }
 
 const eliminarDelCarrito = (id) => {
-    const producto = carrito.find ((producto) => producto.id === id);
+    const producto = carrito.find ((producto) => producto.id == id);
     const indice = carrito.indexOf(producto);
     carrito.splice(indice, 1);
     mostrarCarrito();
@@ -192,4 +192,3 @@ mostrarComics(Comics);
 
 
 */
-
