@@ -28,15 +28,20 @@ fetch(Comics)
             <button id=${producto.id} class="btn-compra">Agregar al carrito</button>
             </div>`;
         });
-        const btnComprar = document.querySelectorAll(".btn-compra");
+        contenedorProductos.addEventListener("click", (e) => {
+            if (e.target.classList.contains("btn-compra")) {
+                agregarAlCarrito(e.target.id);
+            }
+        /*const btnComprar = document.querySelectorAll(".btn-compra");
         btnComprar.forEach(el => {
             console.log(el);
             el.addEventListener("click", (e) => {
                 agregarAlCarrito(e.target.id);
-                console.log("agregado al carrito!");
-            });
-        });
+                
+            });*/
 
+        });
+        mostrarCarrito();
 
     })
     .catch(error => console.log(error))
@@ -86,7 +91,7 @@ const mostrarCarrito = () => {
         
     });
 }
-
+let productoSeleccionado= {};
 const agregarAlCarrito = (id) => {
     const producto = carrito.find((producto) => producto.id == id);
     let productoEnCarrito = {...producto, cantidad: 1}
