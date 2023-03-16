@@ -89,7 +89,7 @@ const mostrarCarrito = () => {
         <p class="text"> ${producto.precio}</p>
         <p class="text"> ${producto.cantidad}</p>
         <button class="btnCarrito" id="eliminar${producto.id}"> Eliminar </button>
-        <div class="btnsCantidad">
+        <div class="btnCarrito">
         <button class="btnCarrito" id="aumentar${producto.id}"> + </button>
         <button class="btnCarrito" id="disminuir${producto.id}"> - </button>
         </div>
@@ -152,10 +152,13 @@ const total = document.getElementById("total");
 
 const calcularTotal = () => {
     let totalCompra = total;
+    totalCompra = Number.parseInt(totalCompra.textContent);
+    totalCompra=Number.isNaN(totalCompra) ? 0 : totalCompra;
     carrito.forEach(producto => {
         totalCompra += producto.precio * producto.cantidad;
     })
     total.innerHTML = `€ ${total}`;
+    console.log(totalCompra)
 }
 
 const vaciarCarritoBtn = document.getElementById("vaciarCarrito");
