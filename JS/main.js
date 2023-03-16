@@ -45,7 +45,7 @@ function importarProductos(productos) {
         })
     })
 }
-const agregarAlCarrito = ( productos, idProducto) => {
+const agregarAlCarrito = (productos, idProducto) => {
     const id = idProducto;
     const producto = productos.find((producto) => producto.id === idProducto);
     const comicEnCarrito = {
@@ -65,7 +65,7 @@ const agregarAlCarrito = ( productos, idProducto) => {
         carrito.push(comicEnCarrito);
     }
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    console.log(producto);  
+    console.log(producto);
 }
 const contenedorCarrito = document.getElementById("contenedorCarrito");
 const VerCarrito = document.getElementById("verCarrito");
@@ -114,7 +114,7 @@ const mostrarCarrito = () => {
         })
     })
     calcularTotal();
-    
+
 }
 
 const aumentarProducto = (id) => {
@@ -135,7 +135,7 @@ const disminuirProducto = (id) => {
     }
     mostrarCarrito();
 
-    
+
 }
 
 const eliminarProducto = (id) => {
@@ -155,34 +155,44 @@ const calcularTotal = () => {
     carrito.forEach(producto => {
         totalCompra += producto.precio * producto.cantidad;
     })
-    total.innerHTML = `€ ${totalCompra}`;
+    total.innerHTML = `€ ${total}`;
 }
 
-const vaciarCarrito = document.getElementById("vaciarCarrito");
+const vaciarCarritoBtn = document.getElementById("vaciarCarrito");
 
-vaciarCarrito.addEventListener("click", () => {
+const vaciarCarrito = () => {
+    carrito = [];
+    localStorage.clear();
+    mostrarCarrito();
+}
+
+vaciarCarritoBtn.addEventListener("click", () => {
     swal.fire({
         title: "¿Esta seguro que desea vaciar el carrito?",
         icon: "warning",
         confirmButtonText: "Aceptar",
         showCancelButton: true,
         cancelButtonText: "Cancelar"
-    })
-        .then((result) => {
-            if (result.isConfirmed) {
-                vaciarCarrito();
-                swal.fire({
-                    title: "Ya se vació tu carrito",
-                    icon: "success",
-                    confirmButtonText: "Ok"
-                })
-            }
-        })
-})
+    }).then((result) => {
+        if (result.isConfirmed) {
+            vaciarCarrito();
+            swal.fire({
+                title: "Ya se vació tu carrito",
+                icon: "success",
+                confirmButtonText: "Ok"
+            });
+        }
+    });
+});
 
-const finalizarCompra = document.getElementById("finalizarCompra");
+const finalizarCompraBtn = document.getElementById("finalizarCompra");
+const finalizarCompra= () => {
+    carrito = [];
+    localStorage.clear();
+    mostrarCarrito();
+}
 
-finalizarCompra.addEventListener("click", () => {
+finalizarCompraBtn.addEventListener("click", () => {
     swal.fire({
         title: "¿Esta seguro que desea confirmar este pedido?",
         icon: "warning",
@@ -196,17 +206,10 @@ finalizarCompra.addEventListener("click", () => {
                 title: "Ya estamos armando su envío!",
                 icon: "success",
                 confirmButtonText: "OK"
-            })
+            });
         }
-    })
-})
-
-
-const vaciarElCarrito = () => {
-    carrito = [];
-    localStorage.clear();
-    mostrarCarrito();
-}
+    });
+});
 
 
 
