@@ -1,12 +1,14 @@
-body{
-    background-color: skyblue;
+html{
+    min-height: 100%;
+    position: relative;
 }
 
-
-
-
-
-#contenedorCarrito{
+body{
+   
+    margin-bottom: 40px;
+    background-color: skyblue;
+}
+#ComicsCont{
     display: flex;
     flex-direction:row;
     flex-wrap: wrap;
@@ -48,11 +50,32 @@ body{
 
 
 }
+.btnCarrito{
+    border-radius: 5px;
+    border-color: black solid;
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+.btnCarrito:hover{
+    background-color: red;
+    color:bisque;
+}
 .btn-compra{
     color: rgb(206, 10, 10);
     border-radius: 5px;
     border-color: black;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.colorbtn{
+    color:bisque;
+    background-color: violet;
+    border-radius: 5px;
+    border-color: black solid;
+    font-family: Arial, Helvetica, sans-serif;
+}
+.colorbtn:hover{
+    color: black;
+    background-color: bisque;
 }
 .btn-compra:hover{
     background-color: rgb(34, 34, 150);
@@ -60,9 +83,14 @@ body{
 
 }
 .footer{
-    height: 20px;
+    margin-left: absolute;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 40px;
     border: 5px black solid;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
     font-size: 15px;
+    background-color: red;
 }
