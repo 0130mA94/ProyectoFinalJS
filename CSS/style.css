@@ -36,6 +36,18 @@ body{
     border: black solid;
 
 }
+
+.imgComics{
+    flex-direction: row;
+    margin-top: 2em;
+    max-width: 170px;
+    height: 200px;
+    border-radius: 15px;
+    border-color: brown solid;
+    border: solid 3px;
+
+
+}
 .btn-compra{
     color: rgb(206, 10, 10);
     border-radius: 5px;
