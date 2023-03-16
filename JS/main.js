@@ -1,24 +1,23 @@
-localStorage.setItem("saludo", "Bienvenido a la cueva del comic!");
-let saludo = localStorage.getItem("saludo");
-console.log(saludo);
-
-
 let comics = [];
-let carrito = [];
-comics = JSON.parse(localStorage.getItem("comics")) || [];
-
-const Comics = "JSON/Comics.json";
-
-
-
-
-
+let carrito = JSON.parse(localStorage.getItem("carrito")) || [];
+const Comics = "/JSON/Comics.json";
 
 fetch(Comics)
-    .then(respuesta => respuesta.json())
+    .then(response => response.json())
     .then(data => {
-        data.forEach(producto => {
-            contenedorCarrito.innerHTML += `
+        productos = data;
+        importarProductos(data);
+    })
+    .catch(error => console.log(error));
+
+const ComicsCont = document.getElementById("ComicsCont");
+
+function importarProductos(productos) {
+    productos.forEach(producto => {
+        const card = document.createElement("div");
+        card.classList.add("coll-xl-3", "col-md-6", "col-sm-12");
+        card.innerHTML =
+            `
             <div class="comic-desc">
             <img class = 'Comics-img' src="${producto.img} " alt="${producto.nombre}"> 
             
@@ -26,8 +25,233 @@ fetch(Comics)
             <p> Precio: ${producto.precio} </p> 
             <h5 class="comic-Editorial">${producto.editorial}</h5>
             <button id=${producto.id} class="btn-compra">Agregar al carrito</button>
-            </div>`;
+            </div>
+            `
+        ComicsCont.appendChild(card);
+
+        const boton = document.getElementById(`boton${producto.id}`);
+        boton.addEventListener("click", () => {
+            agregarAlCarrito(producto.id);
+            Toastify({
+                text: "Agregado al carrito!",
+                duration:2500,
+                gravity:"top",
+                position:"right",
+                style: {
+                    background: "yellow",
+                    color: black
+                }
+            })
+        })
+    })
+}
+const agregarAlCarrito = (id) => {
+    const producto = productos.find((producto) => producto.id === id);
+
+    const comicEnCarrito = {
+        id: producto.id,
+        nombre: producto.nombre,
+        precio:producto.precio,
+        img: producto.img,
+        cantidad: producto.cantidad
+    }
+
+    if (comicEnCarrito) {
+        const index = carrito.findIndex(p => p.id === id)
+        carrito[index].cantidad++;
+    }
+    else {
+        carrito.push(comicEnCarrito);
+    }
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    calcularTotal();
+}
+
+
+const contenedorCarrito = document.getElementById("contenedorCarrito");
+const VerCarrito = document.getElementById("VerCarrito");
+
+VerCarrito.addEventListener("click", () => {
+VerCarrito();
+});
+
+
+const mostrarCarrito = () => {
+    contenedorCarrito.innerHTML = "";
+carrito.forEach(producto => {
+    const card = document.createElement("div");
+    card.classList.add("col-xl-3", "col-md-6", "col-sm-12");
+        card.innerHTML = 
+    `
+<div class = "card rounded-4>
+        <img src = "${producto.img}" class = "card-img-top imgComics" alt= "${producto.nombre}">
+    <div class="cont-desc">
+        <h2 class="text"> ${producto.nombre}</h2>
+        <p class="text"> ${producto.precio}</p>
+        <p class="text"> ${producto.cantidad}</p>
+        <button class="btnCarrito" id="eliminar${producto.id}"> Eliminar </button>
+        <div class="btnsCantidad">
+        <button class="btnCarrito" id="aumentar${producto.id}"> + </button>
+        <button class="btnCarrito" id="disminuir${producto.id}"> - </button>
+        </div>
+    </div>    
+</div>
+    `
+    contenedorCarrito.appendChild(card);
+
+    const aumentar = document.getElementById(`aumentar${producto.id}`)
+    aumentar.addEventListener("click", () => {
+        aumentarProducto(producto.id);
+    })
+
+    const disminuir = document.getElementById(`disminuir${producto.id}`)
+    disminuir.addEventListener("click", () => {
+        disminuirProducto(producto.id);
+    })
+
+    const eliminar = document.getElementById(`eliminar${producto.id}`)
+    eliminar.addEventListener("click", () => {
+        eliminarProducto (producto.id);
+    })
+    })
+    calcularTotal();
+}
+
+const aumentarProducto = (id) => {
+    const producto = carrito.find((producto) => producto.id === id);
+    producto.cantidad++;
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+    mostrarCarrito();
+}
+
+const eliminarProducto = (id) => {
+    const producto = carrito.fin(producto => producto.id === id);
+    const indice = carrito.indexOf(producto);
+    carrito.splice(indice, 1);
+    producto.cantidad = 1;
+    mostrarCarrito();
+    localStorage.setItem("carrito", JSON.stringify(carrito));
+}
+
+
+const total = document.getElementById("total");
+
+const calcularTotal = () => {
+    let totalCompra = 0;
+    carrito.forEach(producto => {
+    })
+    totalCompra.innerHTML = ` €  ${totalCompra}`;
+}
+
+const vaciarCarrito = document.getElementById("VaciarCarrito");
+
+vaciarCarrito.addEventListener("click", () => {
+swal.fire ({
+    title: "¿Esta seguro que desea vaciar el carrito?",
+    icon: "warning",
+    confirmButtonText: "Aceptar",
+    showCancelButton: true,
+    cancelButtonText: "Cancelar"
+})
+.then ((result) => {
+    if (result.isConfirmed) {
+    vaciarCarrito();
+    swal.fire ({
+        title: "Ya se vació tu carrito",
+        icon: "success",
+        confirmButtonText: "Ok"
+        })
+    }
+})
+})
+
+const finalizarCompra = document.getElementById("finalizarCompra");
+
+finalizarCompra.addEventListener("click", () => {
+    swal.fire ({
+        title: "¿Esta seguro que desea confirmar este pedido?",
+        icon: "warning",
+        confirmButtonText: "Si",
+        showCancelButton: true,
+        cancelButtonText: "No"
+    }).then((result) => {
+        if (result.isConfirmed) {
+            vaciarCarrito();
+            swal.fire({
+                title: "Ya estamos armando su envío!",
+                icon: "success",
+                confirmButtonText:"OK"
+            })
+        }
+    })
+})
+
+
+const vaciarElCarrito = () => {
+    carrito = [];
+    localStorage.clear();
+    mostrarCarrito();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*fetch(Comics)
+    .then(respuesta => respuesta.json())
+    .then(data => {
+        data.forEach(producto => {
+            contenedorCarrito.innerHTML += ;
         });
+        const arrayProductos = [];
+        const contenedorProductos = document.getElementById("Productos");
         contenedorProductos.addEventListener("click", (e) => {
             if (e.target.classList.contains("btn-compra")) {
                 agregarAlCarrito(e.target.id);
@@ -38,7 +262,7 @@ fetch(Comics)
             el.addEventListener("click", (e) => {
                 agregarAlCarrito(e.target.id);
                 
-            });*/
+            });
 
         });
         mostrarCarrito();
@@ -91,9 +315,9 @@ const mostrarCarrito = () => {
         
     });
 }
-let productoSeleccionado= {};
+
 const agregarAlCarrito = (id) => {
-    const producto = carrito.find((producto) => producto.id == id);
+    const producto = carrito.findIndex((producto) => producto.id == id);
     let productoEnCarrito = {...producto, cantidad: 1}
     let indexCarrito = carrito.findIndex(producto => producto.id == id);
     if(indexCarrito == -1){
@@ -109,8 +333,15 @@ const agregarAlCarrito = (id) => {
     console.log(carrito);
 }
 const disminuirCantidad = (id) => {
-    const producto = carrito.find((producto) => producto.id == id);
-    producto.cantidad--;
+    const producto = carrito.findIndex((producto) => producto.id == id);
+    let productoEnCarrito = {...producto, cantidad: 1}
+    let indexCarrito = carrito.findIndex(producto => producto.id == id);
+    if(indexCarrito == -1){
+        carrito.push(productoEnCarrito);
+    }
+    else {
+        carrito[indexCarrito].cantidad--
+    }
     if (producto.cantidad == 0) {
         eliminarDelCarrito(id);
     }
@@ -121,7 +352,7 @@ const disminuirCantidad = (id) => {
 }
 
 const eliminarDelCarrito = (id) => {
-    const producto = carrito.find((producto) => producto.id == id);
+    const producto = carrito.findIndex((producto) => producto.id == id);
     const indice = carrito.indexOf(producto);
     carrito.splice(indice, 1);
     mostrarCarrito();
@@ -183,7 +414,7 @@ console.log(Comic1);
 
 localStorage.setItem("Comic1", Comic1JSON);
 
-const contenedorCarrito = document.getElementById("contenedorCarrito");
+const contenedorCarrito = document.getElementById("contenedorCarrito");*/
 
 
 
