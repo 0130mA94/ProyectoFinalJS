@@ -12,8 +12,8 @@ fetch(Comics)
 
 const ComicsCont = document.getElementById("ComicsCont");
 
-function importarProductos(producto) {
-    producto.forEach(producto => {
+function importarProductos(productos) {
+    productos.forEach(producto => {
         const card = document.createElement("div");
         card.classList.add("col-xl-3", "col-md-6", "col-sm-12");
         card.innerHTML =
@@ -31,7 +31,7 @@ function importarProductos(producto) {
 
         const boton = document.getElementById(`boton${producto.id}`);
         boton.addEventListener("click", () => {
-            agregarAlCarrito(producto.id);
+            agregarAlCarrito(productos, producto.id);
             Toastify({
                 text: "Agregado al carrito!",
                 duration: 2500,
@@ -45,9 +45,9 @@ function importarProductos(producto) {
         })
     })
 }
-const agregarAlCarrito = (idProducto) => {
-    const producto = producto.find((producto) => producto.id === idProducto);
-
+const agregarAlCarrito = (productos, idProducto) => {
+    const productoEncontrado = productos.find((producto) => producto.id === idProducto);
+console.log(agregarAlCarrito);
     /*const comicEnCarrito = {
         id: producto.id,
         nombre: producto.nombre,
@@ -55,11 +55,12 @@ const agregarAlCarrito = (idProducto) => {
         img: producto.img,
         cantidad: producto.cantidad
     }*/
-    if (producto) {
-        producto.cantidad++;
+    if (productoEncontrado) {
+        productoEncontrado.cantidad++;
     }
 
     else {
+        console.log("se agrego");
         carrito.push(producto);
     }
     localStorage.setItem("carrito", JSON.stringify(carrito));
@@ -68,9 +69,9 @@ const agregarAlCarrito = (idProducto) => {
 
 
 const contenedorCarrito = document.getElementById("contenedorCarrito");
-const VerCarrito = document.getElementById("VerCarrito");
+const VerCarrito = document.getElementById("verCarrito");
 
-mostrarCarrito.addEventListener("click", () => {
+VerCarrito.addEventListener("click", () => {
     mostrarCarrito();
 });
 
@@ -152,9 +153,9 @@ const calcularTotal = () => {
       totalCompra += producto.precio * producto.cantidad;
     })
     total.innerHTML = `€ ${totalCompra}`;
-  }
+}
 
-const vaciarCarrito = document.getElementById("VaciarCarrito");
+const vaciarCarrito = document.getElementById("vaciarCarrito");
 
 vaciarCarrito.addEventListener("click", () => {
     swal.fire({
