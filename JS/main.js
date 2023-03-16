@@ -157,7 +157,7 @@ const calcularTotal = () => {
     carrito.forEach(producto => {
         totalCompra += producto.precio * producto.cantidad;
     })
-    total.innerHTML = `€ ${total}`;
+    total.innerHTML = `€ ${totalCompra}`;
     console.log(totalCompra)
 }
 
