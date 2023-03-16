@@ -45,26 +45,27 @@ function importarProductos(productos) {
         })
     })
 }
-const agregarAlCarrito = (productos, idProducto) => {
-    const productoEncontrado = productos.find((producto) => producto.id === idProducto);
-console.log(agregarAlCarrito);
-    /*const comicEnCarrito = {
+const agregarAlCarrito = ( productos, idProducto) => {
+    const id = idProducto;
+    const producto = productos.find((producto) => producto.id === idProducto);
+    const comicEnCarrito = {
         id: producto.id,
         nombre: producto.nombre,
         precio: producto.precio,
         img: producto.img,
         cantidad: producto.cantidad
-    }*/
-    if (productoEncontrado) {
-        productoEncontrado.cantidad++;
+    }
+    const existe = carrito.some(p => p.id === id);
+    if (existe) {
+        const indice = carrito.findIndex(p => p.id === id);
+        carrito[indice].cantidad++;
     }
 
     else {
-        console.log("se agrego");
-        carrito.push(producto);
+        carrito.push(comicEnCarrito);
     }
     localStorage.setItem("carrito", JSON.stringify(carrito));
-    calcularTotal();
+    console.log(carrito);
 }
 
 
@@ -125,15 +126,15 @@ const aumentarProducto = (id) => {
 }
 
 const disminuirProducto = (id) => {
-    const producto = carrito.fin((producto) => producto.id === id );
+    const producto = carrito.fin((producto) => producto.id === id);
     if (producto.cantidad === 0) {
         eliminarProducto(id);
         producto.cantidad = 0;
-      } else {
+    } else {
         localStorage.setItem("carrito", JSON.stringify(carrito));
-      }
-      mostrarCarrito();
     }
+    mostrarCarrito();
+}
 
 const eliminarProducto = (id) => {
     const producto = carrito.fin(producto => producto.id === id);
@@ -150,7 +151,7 @@ const total = document.getElementById("total");
 const calcularTotal = () => {
     let totalCompra = total;
     carrito.forEach(producto => {
-      totalCompra += producto.precio * producto.cantidad;
+        totalCompra += producto.precio * producto.cantidad;
     })
     total.innerHTML = `€ ${totalCompra}`;
 }
@@ -188,7 +189,7 @@ finalizarCompra.addEventListener("click", () => {
         cancelButtonText: "No"
     }).then((result) => {
         if (result.isConfirmed) {
-            vaciarCarrito();
+            finalizarCompra();
             swal.fire({
                 title: "Ya estamos armando su envío!",
                 icon: "success",
