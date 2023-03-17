@@ -45,6 +45,7 @@ function importarProductos(productos) {
         })
     })
 }
+
 const agregarAlCarrito = (productos, idProducto) => {
     const id = idProducto;
     const producto = productos.find((producto) => producto.id === idProducto);
@@ -53,7 +54,7 @@ const agregarAlCarrito = (productos, idProducto) => {
         nombre: producto.nombre,
         precio: producto.precio,
         img: producto.img,
-        cantidad: producto.cantidad,
+        cantidad: 1
     }
     const existe = carrito.some(p => p.id === id);
     if (existe) {
