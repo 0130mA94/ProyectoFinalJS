@@ -153,7 +153,8 @@ const total = document.getElementById("total");
 const calcularTotal = () => {
     let totalCompra = total;
     totalCompra = Number.parseInt(totalCompra.textContent);
-    totalCompra=Number.isNaN(totalCompra) ? 0 : totalCompra;
+    totalCompra = Number.isNaN(totalCompra) ? 0 : totalCompra;
+    console.log(totalCompra);
     carrito.forEach(producto => {
         totalCompra += producto.precio * producto.cantidad;
     })
