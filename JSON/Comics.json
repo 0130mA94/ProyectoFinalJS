@@ -4,7 +4,7 @@
     "img": "./Imag-Comics/05.jpg",
     "nombre": "Avengers: Civil War",
     "editorial": "Marvel Comics",
-    "precio": 34.5
+    "precio": 34
 },
 {
     "id":2,
@@ -19,28 +19,28 @@
     "img":"./Imag-Comics/La Ultima caceria de Kraven.jpg",
     "nombre": " Spiderman: La última cacería de Kraven",
     "editorial": "Marvel Comics",
-    "precio": 9.99
+    "precio": 10
 },
 {
     "id":4,
     "img": "https://m.media-amazon.com/images/I/81owJzlRdQL.jpg",
     "nombre": "Batman: Una muerte en la familia",
     "editorial": "DC",
-    "precio": 25.5
+    "precio": 26
 },
 {
     "id":5,
     "img": "https://www.ecccomics.com/content/productos/9712/cubierta_DCBlackLabel_BM_Ano_Uno_3ED.jpg",
     "nombre": "Batman: Año uno",
     "editorial": "DC",
-    "precio": 9.99
+    "precio": 10
 },
 {
     "id":6,
     "img": "https://www.ecccomics.com/content/productos/9003/cubierta_DCBLackLabel_BM_ElRegresoDelCaballeroOscuro.jpg",
     "nombre":"Batman: El regreso del caballero oscuro",
     "editorial": "DC",
-    "precio": 12.9
+    "precio": 13
 },
 {
     "id":7,
